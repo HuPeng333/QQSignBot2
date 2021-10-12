@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>priv.xds</groupId>
+    <artifactId>QQSignBot2</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>auto-sign-api</module>
+        <module>auto-sign-client</module>
+        <module>auto-sign-provider</module>
+        <module>network-gate</module>
+    </modules>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <spring.cloud-version>2020.0.4</spring.cloud-version>
+        <spring.cloud.alibaba-version>2.2.6.RELEASE</spring.cloud.alibaba-version>
+        <spring.boot-version>2.4.2</spring.boot-version>
+        <dubbo-version>2.7.8</dubbo-version>
+        <commons.lang3-version>3.12.0</commons.lang3-version>
+    </properties>
+    <packaging>pom</packaging>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Boot -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring.boot-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- Spring Cloud Alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- auto-sign-api  -->
+            <dependency>
+                <groupId>priv.xds</groupId>
+                <artifactId>auto-sign-api</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <!-- dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-spring-boot-starter</artifactId>
+                <version>${dubbo-version}</version>
+            </dependency>
+            <!-- commons-lang-3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang3-version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

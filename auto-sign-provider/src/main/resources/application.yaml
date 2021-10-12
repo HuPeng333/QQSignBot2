@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: auto-sign-provider
+
+server:
+  port: 8000
+
+dubbo:
+  scan:
+    base-packages: priv.xds.service
