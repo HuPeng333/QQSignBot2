@@ -1,0 +1,16 @@
+bot:
+  auto-sign:
+    enabled: true
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: bot-core
+
+simbot:
+  component:
+    mirai:
+      deviceInfoFile: "./config/device.json"
+  core:
+    scan-package: priv.xds.listener

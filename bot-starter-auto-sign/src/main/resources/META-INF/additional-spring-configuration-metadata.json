@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "bot.auto-sign.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否开启自动打卡功能."
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+simbot:
+  component:
+      mirai:
+        protocol: ANDROID_PAD

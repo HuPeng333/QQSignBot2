@@ -1,0 +1,21 @@
+dubbo:
+  registry:
+    address: nacos://localhost:8848?username=nacos&password=nacos
+  application:
+    name: ${spring.application.name}
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        username: nacos
+        password: nacos
+simbot:
+  core:
+    bot-resource-type: both
+    action-bots: default
+  component:
+    mirai:
+      protocol: ANDROID_PHONE
+server:
+  port: 8081

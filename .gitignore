@@ -3,10 +3,13 @@ target/
 /*/.mvn
 !**/src/main/**/target/
 !**/src/test/**/target/
-/config/application.yaml
-/config/device.json
+/temp/config/application.yaml
+/temp/config/device.json
 /logs/*
 /cache/*
+/config/*
+simbot-bots/
+temp/config/*
 
 ### STS ###
 .apt_generated
