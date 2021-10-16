@@ -1,7 +1,6 @@
 package priv.xds.service;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.sun.istack.internal.NotNull;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -12,6 +11,8 @@ import priv.xds.mapper.AutoSignMapper;
 import priv.xds.pojo.AutoSign;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
+import java.util.List;
 
 /**
  * @author DeSen Xu
@@ -23,6 +24,7 @@ public class AutoSignServiceImpl implements AutoSignService {
 
     private final AutoSignMapper autoSignMapper;
 
+
     @Autowired
     public AutoSignServiceImpl(AutoSignMapper autoSignMapper) {
         this.autoSignMapper = autoSignMapper;
@@ -30,8 +32,14 @@ public class AutoSignServiceImpl implements AutoSignService {
 
     @Override
     @SentinelResource
-    public void registerAutoSign(AutoSign autoSign) {
-        autoSignMapper.insert(autoSign);
+    public void registerAutoSign(AutoSign autoSign) throws UnNecessaryInvokeException{
+        AutoSign user = autoSignMapper.selectById(autoSign.getQq());
+        if (user != null) {
+            // 已经注册
+            throw new UnNecessaryInvokeException();
+        } else {
+            autoSignMapper.insert(autoSign);
+        }
     }
 
     @Override
@@ -55,7 +63,7 @@ public class AutoSignServiceImpl implements AutoSignService {
     @Override
     @SentinelResource
     public void launchAutoSign(String qq) throws UnNecessaryInvokeException, NoSuchUserException {
-        AutoSign autoSign = autoSignMapper.selectById(qq.getBytes(StandardCharsets.UTF_8));
+        AutoSign autoSign = autoSignMapper.selectById(qq);
         if (autoSign == null) {
             throw new NoSuchUserException();
         } else if (autoSign.isActive()) {
@@ -71,7 +79,7 @@ public class AutoSignServiceImpl implements AutoSignService {
     @Override
     @SentinelResource
     public void stopAutoSign(String qq) throws UnNecessaryInvokeException, NoSuchUserException {
-        AutoSign autoSign = autoSignMapper.selectById(qq.getBytes(StandardCharsets.UTF_8));
+        AutoSign autoSign = autoSignMapper.selectById(qq);
         if (autoSign == null) {
             throw new NoSuchUserException();
         } else if (!autoSign.isActive()) {
@@ -84,5 +92,15 @@ public class AutoSignServiceImpl implements AutoSignService {
         autoSignMapper.updateById(temp);
     }
 
+    @Override
+    public List<AutoSign> getWillExpiredUser() {
+        List<AutoSign> willExpiredUser = autoSignMapper.getWillExpiredUser();
+        return willExpiredUser.size() == 0 ? null : willExpiredUser;
+    }
 
+    @Override
+    public List<AutoSign> getActiveUser() {
+        List<AutoSign> autoSignUsers = autoSignMapper.getAutoSignUsers();
+        return autoSignUsers.size() == 0 ? null : autoSignUsers;
+    }
 }

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.Date;
 
 /**
  * @author DeSen Xu
@@ -66,5 +68,17 @@ public class AutoSign implements Serializable {
      * 提交token的时间
      * token有7天的有效期
      */
-    private String tokenSubmitTime;
+    private Date tokenSubmitTime;
+
+    @Override
+    public String toString() {
+        return "已保存的信息:" +
+                "\n学号: " + yhm +
+                "\n联系电话: " + lxdh +
+                "\n家长姓名: " + jjlxr +
+                "\n家长联系电话: " + jjlxdh +
+                "\n打卡地点: " + location +
+                "\n开启状态: " + (active ? "开启中" : "关闭中") +
+                "\n由于token过长,在此不显示!";
+    }
 }

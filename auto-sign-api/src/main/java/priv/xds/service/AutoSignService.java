@@ -6,6 +6,7 @@ import org.springframework.lang.Nullable;
 import priv.xds.exception.NoSuchUserException;
 import priv.xds.exception.UnNecessaryInvokeException;
 import priv.xds.pojo.AutoSign;
+import java.util.List;
 
 /**
  * 测试接口
@@ -17,8 +18,9 @@ public interface AutoSignService {
     /**
      * 注册自动打卡服务
      * @param autoSign 用户信息
+     * @throws UnNecessaryInvokeException 用户已经注册
      */
-    void registerAutoSign(@NotNull AutoSign autoSign);
+    void registerAutoSign(@NotNull AutoSign autoSign) throws UnNecessaryInvokeException;
 
     /**
      * 获取用户保存在数据库的信息
@@ -50,5 +52,19 @@ public interface AutoSignService {
      * @throws NoSuchUserException 该用户没有注册
      */
     void stopAutoSign(@NotNull String qq) throws UnNecessaryInvokeException, NoSuchUserException;
+
+    /**
+     * 获取token即将过期的用户(即将过期: 用户的token还剩余1天的有效期)
+     * @return 即将过期的用户
+     */
+    @Nullable
+    List<AutoSign> getWillExpiredUser();
+
+    /**
+     * 获取需要帮助自动打卡的用户
+     * @return 需要帮助自动打卡的用户
+     */
+    @Nullable
+    List<AutoSign> getActiveUser();
 
 }

@@ -3,6 +3,7 @@ package priv.xds;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * @author DeSen Xu
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 @MapperScan("priv.xds.mapper")
+@EnableScheduling
 public class AutoSignProviderApplication {
     public static void main(String[] args) {
         SpringApplication.run(AutoSignProviderApplication.class, args);
