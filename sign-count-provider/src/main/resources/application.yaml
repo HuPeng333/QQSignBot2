@@ -1,8 +1,8 @@
 spring:
+  application:
+    name: sign-count-provider
   profiles:
     active: dev
-  application:
-    name: auto-sign-provider
 
 
 dubbo:

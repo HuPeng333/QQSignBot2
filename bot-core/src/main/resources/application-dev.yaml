@@ -3,6 +3,8 @@ dubbo:
     address: nacos://localhost:8848?username=nacos&password=nacos
   application:
     name: ${spring.application.name}
+  consumer:
+    check: false
 spring:
   cloud:
     nacos:
@@ -10,6 +12,7 @@ spring:
         server-addr: localhost:8848
         username: nacos
         password: nacos
+
 simbot:
   core:
     bot-resource-type: both

@@ -75,6 +75,12 @@
                 <artifactId>mybatis-plus-boot-starter</artifactId>
                 <version>${mybatis.plus-version}</version>
             </dependency>
+            <!-- sign-count-api -->
+            <dependency>
+                <groupId>priv.xds</groupId>
+                <artifactId>sign-count-api</artifactId>
+                <version>${version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -28,8 +28,26 @@
 
 作为服务提供者,提供自动打卡等功能(跟一代一样，不是所有人都可以用的)
 
+### bot-starter-sign-count
+
+机器人拓展，用于统计打卡
+
+### sign-count-api
+
+统计打卡功能服务的相关api
+
+### sign-count-provider
+
+统计打卡服务的提供者
+
+
 
 ## 启动项目
+
+### 1.安装nacos注册中心
+
+[传送门](https://github.com/alibaba/nacos/releases)
+
 
 *还没写好呢！*
 
