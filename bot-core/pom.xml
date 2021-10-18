@@ -104,6 +104,11 @@
             <groupId>priv.xds</groupId>
             <artifactId>bot-starter-sign-count</artifactId>
         </dependency>
+        <!-- 熔断器 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

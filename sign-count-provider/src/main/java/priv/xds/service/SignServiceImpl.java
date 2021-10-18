@@ -109,7 +109,7 @@ public class SignServiceImpl implements SignService {
     @Override
     public List<Sign> getUnsignedUser() {
         QueryWrapper<Sign> sql = new QueryWrapper<>();
-        List<Sign> signs = signMapper.selectList(sql.ne(SignMapper.LAST_SIGN_COLUMN, new Date()).eq(SignMapper.SIGN_IGNORE_COLUMN, false));
+        List<Sign> signs = signMapper.selectList(sql.ne(SignMapper.LAST_SIGN_COLUMN, new java.sql.Date(System.currentTimeMillis())).eq(SignMapper.SIGN_IGNORE_COLUMN, false));
         if (signs.size() == 0) {
             return null;
         }
@@ -119,7 +119,7 @@ public class SignServiceImpl implements SignService {
     @Override
     public List<Sign> getUnsignedUser(String groupCode) {
         QueryWrapper<Sign> sql = new QueryWrapper<>();
-        List<Sign> signs = signMapper.selectList(sql.ne(SignMapper.LAST_SIGN_COLUMN, new Date()).eq(SignMapper.SIGN_IGNORE_COLUMN, false).eq(SignMapper.GROUP_CODE_COLUMN, groupCode));
+        List<Sign> signs = signMapper.selectList(sql.ne(SignMapper.LAST_SIGN_COLUMN, new java.sql.Date(System.currentTimeMillis())).eq(SignMapper.SIGN_IGNORE_COLUMN, false).eq(SignMapper.GROUP_CODE_COLUMN, groupCode));
         if (signs.size() == 0) {
             return null;
         }

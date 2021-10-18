@@ -1,5 +1,6 @@
 package priv.xds.listener;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import love.forte.simbot.annotation.Filter;
 import love.forte.simbot.annotation.OnGroup;
 import love.forte.simbot.api.message.events.GroupMsg;
@@ -29,6 +30,7 @@ public class SignListener {
 
     @OnGroup
     @Filter(value = "打卡", matchType = MatchType.EQUALS)
+    @SentinelResource("sign")
     public void sign(GroupMsg groupMsg, MsgSender sender) {
         String qq = groupMsg.getAccountInfo().getAccountCode();
         String groupCode = groupMsg.getGroupInfo().getGroupCode();
@@ -104,13 +106,14 @@ public class SignListener {
     public void getUnsignedUsers(GroupMsg groupMsg, MsgSender sender) {
         List<Sign> unsignedUser = signService.getUnsignedUser(groupMsg.getGroupInfo().getGroupCode());
         if (unsignedUser == null) {
+            System.out.println("都打卡了");
             sender.SENDER.sendGroupMsg(groupMsg, "所有人都已经打卡了!");
             return;
         }
         StringBuilder builder = new StringBuilder(unsignedUser.size() * 15);
         builder.append("以下成员还没有打卡:\n");
         for (Sign sign : unsignedUser) {
-            GroupMemberInfo memberInfo = sender.GETTER.getMemberInfo(sign.getQq(), sign.getQq());
+            GroupMemberInfo memberInfo = sender.GETTER.getMemberInfo(sign.getGroupCode(), sign.getQq());
             builder.append(memberInfo.getAccountCode());
             builder.append(memberInfo.getAccountNicknameAndRemark());
             builder.append("\n");

@@ -13,3 +13,4 @@ simbot:
 dubbo:
   consumer:
     check: false
+
