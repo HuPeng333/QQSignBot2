@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -13,7 +14,9 @@ import java.util.Objects;
  */
 @Data
 @TableName("t_sign")
-public class Sign {
+public class Sign implements Serializable {
+
+    public static final long serialVersionUID = 421515L;
 
     private String qq;
 

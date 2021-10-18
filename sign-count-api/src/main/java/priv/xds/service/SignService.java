@@ -1,5 +1,6 @@
 package priv.xds.service;
 
+import org.springframework.lang.Nullable;
 import priv.xds.exception.NoRepeatableException;
 import priv.xds.exception.NoSuchUserException;
 import priv.xds.exception.UnNecessaryInvokeException;
@@ -58,12 +59,26 @@ public interface SignService {
      */
     int initGroup(String groupCode, List<Sign> groupMemberList) throws UnNecessaryInvokeException;
 
-//    /**
-//     * 注册一个成员
-//     * @param qq qq
-//     * @param groupCode 群号
-//     * @throws UnNecessaryInvokeException 已经注册了
-//     */
-//    void registerUser(String qq, String groupCode) throws UnNecessaryInvokeException;
+    /**
+     * 获取未打卡的成员
+     * @return 未打卡成员
+     */
+    @Nullable
+    List<Sign> getUnsignedUser() ;
+
+    /**
+     * 获取某个群内没有打卡的成员
+     * @param groupCode 群号
+     * @return 未打卡成员
+     */
+    @Nullable
+    List<Sign> getUnsignedUser(String groupCode);
+
+    /**
+     * 删除用户在数据库的信息
+     * @param qq qq号
+     * @param groupCode 群号
+     */
+    void deleteUser(String qq, String groupCode);
 
 }

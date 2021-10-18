@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "bot.sign-count.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否开启打卡统计功能."
+    },
+    {
+      "name": "bot.sign-count.admins",
+      "type": "java.util.List<java.lang.String>",
+      "description": "超级用户列表."
+    }
+  ]
+}

@@ -21,5 +21,8 @@ spring:
 dubbo:
   registry:
     address: nacos://localhost:8848?username=nacos&password=nacos
+  protocol:
+    port: 20879
+    id: dubbo
   application:
     name: ${spring.application.name}

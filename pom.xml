@@ -81,6 +81,18 @@
                 <artifactId>sign-count-api</artifactId>
                 <version>${version}</version>
             </dependency>
+            <!-- sign-count-starter -->
+            <dependency>
+                <groupId>priv.xds</groupId>
+                <artifactId>bot-starter-sign-count</artifactId>
+                <version>${version}</version>
+            </dependency>
+            <!-- bot-common -->
+            <dependency>
+                <groupId>priv.xds</groupId>
+                <artifactId>bot-common</artifactId>
+                <version>${version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

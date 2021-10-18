@@ -1,8 +1,8 @@
 package priv.xds.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
-import priv.xds.exception.NoRepeatableException;
 import priv.xds.exception.NoSuchUserException;
 import priv.xds.exception.UnNecessaryInvokeException;
 import priv.xds.mapper.SignMapper;
@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
  * @date 2021-10-17 15:08
  */
 @Service
+@DubboService
 public class SignServiceImpl implements SignService {
 
     private final SignMapper signMapper;
@@ -103,5 +104,31 @@ public class SignServiceImpl implements SignService {
         }
         signMapper.insertUsers(noRepeatUsers);
         return noRepeatUsers.size();
+    }
+
+    @Override
+    public List<Sign> getUnsignedUser() {
+        QueryWrapper<Sign> sql = new QueryWrapper<>();
+        List<Sign> signs = signMapper.selectList(sql.ne(SignMapper.LAST_SIGN_COLUMN, new Date()).eq(SignMapper.SIGN_IGNORE_COLUMN, false));
+        if (signs.size() == 0) {
+            return null;
+        }
+        return signs;
+    }
+
+    @Override
+    public List<Sign> getUnsignedUser(String groupCode) {
+        QueryWrapper<Sign> sql = new QueryWrapper<>();
+        List<Sign> signs = signMapper.selectList(sql.ne(SignMapper.LAST_SIGN_COLUMN, new Date()).eq(SignMapper.SIGN_IGNORE_COLUMN, false).eq(SignMapper.GROUP_CODE_COLUMN, groupCode));
+        if (signs.size() == 0) {
+            return null;
+        }
+        return signs;
+    }
+
+    @Override
+    public void deleteUser(String qq, String groupCode) {
+        QueryWrapper<Sign> sql = new QueryWrapper<>();
+        signMapper.delete(sql.eq(SignMapper.QQ_COLUMN, qq).eq(SignMapper.GROUP_CODE_COLUMN, groupCode));
     }
 }

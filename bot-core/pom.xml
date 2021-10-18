@@ -99,6 +99,11 @@
             <groupId>priv.xds</groupId>
             <artifactId>bot-starter-auto-sign</artifactId>
         </dependency>
+        <!-- 打卡统计 -->
+        <dependency>
+            <groupId>priv.xds</groupId>
+            <artifactId>bot-starter-sign-count</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
