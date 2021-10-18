@@ -38,6 +38,12 @@ public interface AutoSignService {
     void updateUserInfo(@NotNull AutoSign autoSign) throws NoSuchUserException;
 
     /**
+     * 修改该用户上次自动打卡的时间
+     * @param qq qq号
+     */
+    void updateLastSignTime(@NotNull String qq);
+
+    /**
      * 开启自动打卡
      * @param qq 用户qq
      * @throws UnNecessaryInvokeException 已经开启了自动打卡

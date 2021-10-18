@@ -18,6 +18,7 @@ public class AutoSign implements Serializable {
 
     private static final long serialVersionUID = 33333L;
 
+
     /**
      * 用户qq
      */
@@ -60,9 +61,9 @@ public class AutoSign implements Serializable {
     private boolean active;
 
     /**
-     * 是否已经自动打卡过
+     * 上次自动打卡时间
      */
-    private boolean signed;
+    private Date lastSign;
 
     /**
      * 提交token的时间

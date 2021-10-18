@@ -17,6 +17,11 @@ import java.util.List;
 @Component
 public interface AutoSignMapper extends BaseMapper<AutoSign> {
 
+    String LAST_SIGN_COLUMN = "last_sign";
+
+    String ACTIVE_COLUMN = "active";
+
+
     /**
      * 获取token即将过期的用户
      * @return token即将过期的用户
@@ -24,10 +29,4 @@ public interface AutoSignMapper extends BaseMapper<AutoSign> {
     @Select("select * from t_auto_sign where CURDATE() - token_submit_time = 6;")
     List<AutoSign> getWillExpiredUser();
 
-    /**
-     * 获取开启了自动打卡的用户,每次仅限5个
-     * @return 开起了自动打卡的用户
-     */
-    @Select("select * from t_auto_sign where active = 1 and signed = 0 limit 5;")
-    List<AutoSign> getAutoSignUsers();
 }

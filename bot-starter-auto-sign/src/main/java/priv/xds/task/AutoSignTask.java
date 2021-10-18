@@ -11,6 +11,8 @@ import priv.xds.function.SignHelper;
 import priv.xds.function.SignResponse;
 import priv.xds.pojo.AutoSign;
 import priv.xds.service.AutoSignService;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,6 +55,8 @@ public class AutoSignTask {
             log.info("帮助用户: " + autoSign.getQq() + "打卡," + "结果: " + resp.getMessage());
             if (resp.isSuccess()) {
                 sender.sendPrivateMsg(resp.getUser(), "已经帮你自动打卡了");
+                // 更新上次自动打卡时间,防止连续打卡
+                autoSignService.updateLastSignTime(autoSign.getQq());
             } else {
                 sender.sendPrivateMsg(resp.getUser(), "自动打卡失败: " + resp.getMessage() + "\n已经帮你关闭自动打卡了!");
                 try {

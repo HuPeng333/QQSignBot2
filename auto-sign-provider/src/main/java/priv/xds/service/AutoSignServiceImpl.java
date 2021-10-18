@@ -1,6 +1,7 @@
 package priv.xds.service;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -11,6 +12,7 @@ import priv.xds.mapper.AutoSignMapper;
 import priv.xds.pojo.AutoSign;
 
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.time.Instant;
 import java.util.List;
 
@@ -61,6 +63,17 @@ public class AutoSignServiceImpl implements AutoSignService {
     }
 
     @Override
+    public void updateLastSignTime(String qq) {
+        AutoSign autoSign = new AutoSign();
+        autoSign.setQq(qq);
+        autoSign.setLastSign(new java.util.Date());
+        try {
+            updateUserInfo(autoSign);
+        } catch (NoSuchUserException ignored) {
+        }
+    }
+
+    @Override
     @SentinelResource
     public void launchAutoSign(String qq) throws UnNecessaryInvokeException, NoSuchUserException {
         AutoSign autoSign = autoSignMapper.selectById(qq);
@@ -100,7 +113,11 @@ public class AutoSignServiceImpl implements AutoSignService {
 
     @Override
     public List<AutoSign> getActiveUser() {
-        List<AutoSign> autoSignUsers = autoSignMapper.getAutoSignUsers();
-        return autoSignUsers.size() == 0 ? null : autoSignUsers;
+        QueryWrapper<AutoSign> sql = new QueryWrapper<>();
+        List<AutoSign> autoSigns = autoSignMapper.selectList(sql.ne(AutoSignMapper.LAST_SIGN_COLUMN, new Date(System.currentTimeMillis())).eq(AutoSignMapper.ACTIVE_COLUMN, true));
+        if (autoSigns.size() == 0) {
+            return null;
+        }
+        return autoSigns;
     }
 }
