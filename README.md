@@ -1,5 +1,7 @@
 # QQSignBot2
 
+**此项目废弃! 不建议学习！因为服务调用方是非web项目,而且我也找不到适合非web项目的日志追踪,导致中间的报错十分难以解决！！因此废弃！**
+
 ## 前言
 
 此项目的前身为: [QQSignBot](https://github.com/HuPeng333/QQSignBot)
